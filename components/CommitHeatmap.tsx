@@ -101,7 +101,7 @@ const CommitHeatmap: React.FC<CommitHeatmapProps> = ({ history, streak }) => {
                 }
 
                 let bgClass = 'bg-slate-800/60 border-slate-700/50';
-                let content = <div className="text-[8px] text-slate-700 font-mono select-none">+</div>;
+                let content: React.ReactNode = <div className="text-[8px] text-slate-700 font-mono select-none">+</div>;
                 
                 // Opacity-based gradient for smoother transition using theme color
                 if (day.intensity > 0) {
