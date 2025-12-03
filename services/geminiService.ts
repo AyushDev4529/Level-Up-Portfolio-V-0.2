@@ -4,7 +4,7 @@ import { ChatMessage } from "../types";
 // Declare process for browser environment compatibility check
 declare var process: any;
 
-const API_KEY = process.env.API_KEY || '';
+const API_KEY = import.meta.env.VITE_API_KEY || process.env.API_KEY || '';
 
 const ai = new GoogleGenAI({ apiKey: API_KEY });
 
@@ -20,7 +20,7 @@ If asked about GitHub, refer to "github.com/AyushDev4529".
 `;
 
 export const sendMessageToGemini = async (
-  history: ChatMessage[], 
+  history: ChatMessage[],
   newMessage: string
 ): Promise<string> => {
   if (!API_KEY) {
