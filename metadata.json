@@ -1,0 +1,5 @@
+{
+  "name": "DevQuest Portfolio",
+  "description": "A gamified portfolio for a game developer featuring an interactive HUD, stats visualization, and an AI companion powered by Gemini.",
+  "requestFramePermissions": []
+}
