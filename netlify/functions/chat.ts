@@ -12,37 +12,51 @@ export const handler = async (event: any) => {
         if (!apiKey) {
             console.error("API_KEY is missing in environment variables");
             return {
-                statusCode: 500,
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ error: "Server configuration error" }),
-            };
-        }
+                import { GoogleGenAI } from "@google/genai";
 
-        const genAI = new GoogleGenAI({ apiKey });
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+                export const handler = async (event: any) => {
+                    if (event.httpMethod !== "POST") {
+                        return { statusCode: 405, body: "Method Not Allowed" };
+                    }
 
-        const chat = model.startChat({
-            history: history.map((msg: any) => ({
-                role: msg.role,
-                parts: [{ text: msg.text }],
-            })),
-        });
+                    try {
+                        const { history, message } = JSON.parse(event.body || "{}");
+                        const apiKey = process.env.API_KEY || process.env.VITE_API_KEY;
 
-        const result = await chat.sendMessage(message);
-        const response = await result.response;
-        const text = response.text();
+                        if (!apiKey) {
+                            console.error("API_KEY is missing in environment variables");
+                            return {
+                                statusCode: 500,
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ error: "Server configuration error" }),
+                            };
+                        }
 
-        return {
-            statusCode: 200,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text }),
-        };
-    } catch (error) {
-        console.error("Error in chat function:", error);
-        return {
-            statusCode: 500,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ error: "Failed to process request" }),
-        };
-    }
-};
+                        const genAI = new GoogleGenAI({ apiKey });
+                        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+                        const chat = model.startChat({
+                            history: history.map((msg: any) => ({
+                                role: msg.role,
+                                parts: [{ text: msg.text }],
+                            })),
+                        });
+
+                        const result = await chat.sendMessage(message);
+                        const response = await result.response;
+                        const text = response.text();
+
+                        return {
+                            statusCode: 200,
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ text }),
+                        };
+                    } catch (error: any) {
+                        console.error("Error in chat function:", error);
+                        return {
+                            statusCode: 500,
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ error: error.message || String(error) }),
+                        };
+                    }
+                };
