@@ -1,72 +1,86 @@
 <!DOCTYPE html>
 <html lang="en" class="overflow-x-hidden">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DevQuest | Game Dev Portfolio</title>
-    <!-- Tailwind CSS (Using CDN for simplicity in this hybrid setup, though PostCSS is recommended for full prod) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      // Polyfill process.env for browser environment to prevent ReferenceError in code that accesses it
-      window.process = window.process || { env: { API_KEY: '' } };
-      
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'neon-green': '#39ff14',
-              'neon-blue': '#00ffff',
-              'neon-pink': '#ff00ff',
-              'dark-bg': '#0f172a',
-              'panel-bg': '#1e293b',
-            },
-            fontFamily: {
-              mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
-            },
-            animation: {
-              'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'float': 'float 3s ease-in-out infinite',
-            },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-10px)' },
-              }
-            }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://aistudiocdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://generativelanguage.googleapis.com;">
+  <title>DevQuest | Level Up Your Portfolio</title>
+  <!-- Tailwind CSS (Using CDN for simplicity in this hybrid setup, though PostCSS is recommended for full prod) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'neon-green': '#39ff14',
+            'neon-blue': '#00ffff',
+            'neon-pink': '#ff00ff',
+            'dark-bg': '#0f172a',
+            'panel-bg': '#1e293b',
           },
+          fontFamily: {
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+          },
+          animation: {
+            'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 3s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
         },
+      },
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar for Webkit */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    @media print {
+      .no-print {
+        display: none !important;
       }
-    </script>
-    <style>
-      /* Custom Scrollbar for Webkit */
-      ::-webkit-scrollbar {
-        width: 8px;
+
+      .print-only {
+        display: block !important;
       }
-      ::-webkit-scrollbar-track {
-        background: #0f172a; 
+
+      #resume-print-view {
+        display: flex !important;
       }
-      ::-webkit-scrollbar-thumb {
-        background: #334155; 
-        border-radius: 4px;
+
+      /* Ensure background colors print */
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background-color: white !important;
+        /* Force white background for paper */
+        overflow: visible !important;
+        visibility: visible !important;
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #475569; 
-      }
-      @media print {
-        .no-print { display: none !important; }
-        .print-only { display: block !important; }
-        #resume-print-view { display: flex !important; }
-        
-        /* Ensure background colors print */
-        body {
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-          background-color: white !important; /* Force white background for paper */
-          overflow: visible !important;
-          visibility: visible !important;
-        }
-      }
-    </style>
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -84,8 +98,10 @@
 }
 </script>
 </head>
-  <body class="bg-dark-bg text-slate-200 font-mono overflow-x-hidden">
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+
+<body class="bg-dark-bg text-slate-200 font-mono overflow-x-hidden">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>

@@ -28,5 +28,8 @@
   "include": [
     "**/*.ts",
     "**/*.tsx"
+  ],
+  "exclude": [
+    "netlify"
   ]
 }
