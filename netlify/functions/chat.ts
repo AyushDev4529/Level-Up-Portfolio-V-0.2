@@ -1,48 +1,56 @@
 import { GoogleGenAI } from "@google/genai";
+import type { Context } from "@netlify/functions";
 
-export const handler = async (event: any) => {
-    if (event.httpMethod !== "POST") {
-        return { statusCode: 405, body: "Method Not Allowed" };
+export default async (req: Request, context: Context) => {
+    if (req.method !== "POST") {
+        return new Response("Method Not Allowed", { status: 405 });
     }
 
     try {
-        const { history, message } = JSON.parse(event.body || "{}");
-        const apiKey = process.env.API_KEY || process.env.VITE_API_KEY;
+        const { history, message } = await req.json();
+        const apiKey = Netlify.env.get("API_KEY") || Netlify.env.get("VITE_API_KEY");
 
         if (!apiKey) {
             console.error("API_KEY is missing in environment variables");
-            return {
-                statusCode: 500,
+            return new Response(JSON.stringify({ error: "Server configuration error" }), {
+                status: 500,
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ error: "Server configuration error" }),
-            };
+            });
         }
 
-        const genAI = new GoogleGenAI({ apiKey });
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const ai = new GoogleGenAI({ apiKey });
 
-        const chat = model.startChat({
-            history: history.map((msg: any) => ({
-                role: msg.role,
-                parts: [{ text: msg.text }],
-            })),
+        // Construct the prompt with history
+        const contents = history.map((msg: any) => ({
+            role: msg.role,
+            parts: [{ text: msg.text }],
+        }));
+
+        // Add the new message
+        contents.push({
+            role: "user",
+            parts: [{ text: message }],
         });
 
-        const result = await chat.sendMessage(message);
-        const response = await result.response;
+        const { response } = await ai.models.generateContent({
+            model: "gemini-2.0-flash",
+            contents: contents,
+        });
+
         const text = response.text();
 
-        return {
-            statusCode: 200,
+        return new Response(JSON.stringify({ text }), {
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text }),
-        };
+        });
     } catch (error: any) {
         console.error("Error in chat function:", error);
-        return {
-            statusCode: 500,
+        return new Response(JSON.stringify({ error: error.message || String(error) }), {
+            status: 500,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ error: error.message || String(error) }),
-        };
+        });
     }
+};
+
+export const config = {
+    path: "/api/chat",
 };
