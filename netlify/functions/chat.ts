@@ -1,20 +1,21 @@
 import { GoogleGenAI } from "@google/genai";
 
-export default async (req: Request) => {
-    if (req.method !== "POST") {
-        return new Response("Method Not Allowed", { status: 405 });
+export const handler = async (event: any) => {
+    if (event.httpMethod !== "POST") {
+        return { statusCode: 405, body: "Method Not Allowed" };
     }
 
     try {
-        const { history, message } = await req.json();
+        const { history, message } = JSON.parse(event.body || "{}");
         const apiKey = process.env.API_KEY || process.env.VITE_API_KEY;
 
         if (!apiKey) {
             console.error("API_KEY is missing in environment variables");
-            return new Response(JSON.stringify({ error: "Server configuration error" }), {
-                status: 500,
+            return {
+                statusCode: 500,
                 headers: { "Content-Type": "application/json" },
-            });
+                body: JSON.stringify({ error: "Server configuration error" }),
+            };
         }
 
         const genAI = new GoogleGenAI({ apiKey });
@@ -31,18 +32,17 @@ export default async (req: Request) => {
         const response = await result.response;
         const text = response.text();
 
-        return new Response(JSON.stringify({ text }), {
+        return {
+            statusCode: 200,
             headers: { "Content-Type": "application/json" },
-        });
+            body: JSON.stringify({ text }),
+        };
     } catch (error) {
         console.error("Error in chat function:", error);
-        return new Response(JSON.stringify({ error: "Failed to process request" }), {
-            status: 500,
+        return {
+            statusCode: 500,
             headers: { "Content-Type": "application/json" },
-        });
+            body: JSON.stringify({ error: "Failed to process request" }),
+        };
     }
-};
-
-export const config = {
-    path: "/.netlify/functions/chat",
 };
