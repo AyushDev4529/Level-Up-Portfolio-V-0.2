@@ -16,7 +16,6 @@ const ResumePrintView: React.FC<ResumePrintViewProps> = ({ skills, projects }) =
         {/* Profile Image */}
         <div className="flex justify-center mb-2">
           <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white/20 shadow-lg relative">
-             {/* Using GitHub avatar as placeholder since exact image isn't available, or a generic placeholder */}
              <img 
                src="https://github.com/AyushDev4529.png" 
                alt="Ayush Singh" 
@@ -68,36 +67,28 @@ const ResumePrintView: React.FC<ResumePrintViewProps> = ({ skills, projects }) =
           </div>
         </section>
 
-        {/* Technical Skills */}
+        {/* Technical & Commercial Skills */}
         <section>
-          <h2 className="text-xl font-bold uppercase border-b border-white/30 pb-2 mb-4">Technical Skills</h2>
+          <h2 className="text-xl font-bold uppercase border-b border-white/30 pb-2 mb-4">Skills & Expertise</h2>
           <div className="space-y-4 text-sm">
             <div>
-              <div className="font-bold text-white/90 mb-1">Programming</div>
+              <div className="font-bold text-white/90 mb-1">Operations & Compliance</div>
+              <ul className="list-disc list-inside text-white/80 marker:text-white/50 space-y-1">
+                 <li>SAP ERP Operations</li>
+                 <li>Compliance Management</li>
+                 <li>B2B Customer Relations</li>
+                 <li>Client Problem Solving</li>
+                 <li>Intermediate Excel</li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-bold text-white/90 mb-1">Programming & Game Dev</div>
               <ul className="list-disc list-inside text-white/80 marker:text-white/50 space-y-1">
                  <li>C#</li>
-                 <li>JavaScript</li>
-                 <li>HTML</li>
-                 <li>CSS</li>
-              </ul>
-            </div>
-            <div>
-              <div className="font-bold text-white/90 mb-1">Frameworks & Tools</div>
-              <ul className="list-disc list-inside text-white/80 marker:text-white/50 space-y-1">
-                 <li>React.js</li>
                  <li>Unity</li>
+                 <li>Game Mechanics & OOP</li>
                  <li>Git, GitHub</li>
                  <li>VS Code</li>
-              </ul>
-            </div>
-            <div>
-              <div className="font-bold text-white/90 mb-1">Expertise</div>
-              <ul className="list-disc list-inside text-white/80 marker:text-white/50 space-y-1">
-                 <li>UI/UX Basics</li>
-                 <li>Responsive Web Design</li>
-                 <li>Game Mechanics</li>
-                 <li>OOP</li>
-                 <li>Problem Solving</li>
               </ul>
             </div>
           </div>
@@ -120,13 +111,9 @@ const ResumePrintView: React.FC<ResumePrintViewProps> = ({ skills, projects }) =
         {/* Header */}
         <header className="mb-4">
           <h1 className="text-5xl font-bold uppercase tracking-wide text-[#2c3e50] mb-2">Ayush Singh</h1>
-          <div className="text-2xl tracking-[0.2em] uppercase text-slate-500">Junior Developer</div>
+          <div className="text-2xl tracking-[0.2em] uppercase text-slate-500">Compliance Executive</div>
           <p className="mt-6 text-sm leading-relaxed text-slate-600 text-justify">
-            Software Developer with a strong foundation in Computer Science, experience in frontend web
-            development (HTML, CSS, JavaScript, React), and ongoing specialization in Unity and C# game
-            development. Proven adaptability through roles in customer service and billing operations. Seeking
-            an opportunity in Software Engineering, Frontend Development, or Game Development to build
-            innovative digital solutions.
+            Detail-oriented Compliance and Operations professional with hands-on experience navigating complex enterprise environments. Proven track record of operating SAP to process orders, managing B2B customer relations, and ensuring regulatory compliance for major infrastructure projects. Equipped with a strong technical foundation in Computer Science, bringing an analytical, problem-solving approach to workflow efficiency, client communications, and operational data management.
           </p>
         </header>
 
@@ -140,14 +127,14 @@ const ResumePrintView: React.FC<ResumePrintViewProps> = ({ skills, projects }) =
             <div className="relative">
               <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 border-[#2c3e50] bg-white"></div>
               <div className="flex items-baseline justify-between mb-1">
-                 <h3 className="font-bold text-lg">Billing Executive</h3>
+                 <h3 className="font-bold text-lg">Compliance Manager</h3>
                  <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded">2025 - Present</span>
               </div>
-              <div className="text-slate-500 italic text-sm mb-2">Om Infra Projects | New Delhi, India</div>
+              <div className="text-slate-500 italic text-sm mb-2">Om Infra Shrey India Pvt. Ltd. (Acquired Om Infra Projects, April 2026) | New Delhi</div>
               <ul className="list-disc list-outside ml-4 text-sm text-slate-600 space-y-1 marker:text-slate-400">
-                <li>Managing billing workflows, documentation, and financial data accuracy.</li>
-                <li>Coordinating with project teams for timely verification and updates.</li>
-                <li>Improved data consistency and streamlined record-keeping processes.</li>
+                <li>Manage regulatory compliance, billing workflows, and documentation for large-scale infrastructure operations.</li>
+                <li>Interact directly with major B2B enterprise clients, including Larsen & Toubro (L&T) and Tata Projects Ltd (TPL), to ensure project requirements are met.</li>
+                <li>Utilize intermediate Excel to maintain financial data accuracy, generate reports, and streamline complex record-keeping processes.</li>
               </ul>
             </div>
 
@@ -160,11 +147,10 @@ const ResumePrintView: React.FC<ResumePrintViewProps> = ({ skills, projects }) =
               </div>
               <div className="text-slate-500 italic text-sm mb-2">Manohar Filaments Pvt. Ltd. | New Delhi, India</div>
               <ul className="list-disc list-outside ml-4 text-sm text-slate-600 space-y-1 marker:text-slate-400">
-                <li>Processed and managed brand orders in SAP, ensuring accuracy in specifications, quantities, and delivery timelines.</li>
-                <li>Coordinated directly with major clients like Fila, Adidas, Puma, and BlackBerry, handling communication and order updates over email.</li>
-                <li>Worked with Product Development and Production teams to resolve product issues, approve samples, and track manufacturing progress.</li>
-                <li>Ensured on-time delivery by monitoring workflow and following up with production, dispatch, and logistics teams.</li>
-                <li>Maintained 5S standards and supported cross-functional teamwork to improve efficiency and reduce errors.</li>
+                <li>Operated SAP to manually place orders and process brand requests, ensuring total accuracy in specifications and delivery timelines.</li>
+                <li>Managed and interacted directly with major B2B clients, including Fila, Ducati, Adidas, and Puma, addressing inquiries and solving operational problems.</li>
+                <li>Maintained strong customer relations by serving as the primary communication bridge between external clients and internal production teams.</li>
+                <li>Monitored dispatch and logistics workflows to track manufacturing progress and guarantee on-time delivery.</li>
               </ul>
             </div>
 
@@ -172,16 +158,14 @@ const ResumePrintView: React.FC<ResumePrintViewProps> = ({ skills, projects }) =
             <div className="relative">
               <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 border-[#2c3e50] bg-white"></div>
               <div className="flex items-baseline justify-between mb-1">
-                 <h3 className="font-bold text-lg underline decoration-slate-300 underline-offset-4">Project - Meeting App Zoom Clone</h3>
-                 <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded">2020 - 2024</span>
+                 <h3 className="font-bold text-lg underline decoration-slate-300 underline-offset-4">Technical Project - Kitchen Chaos (3D Game)</h3>
+                 <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded">2025 - 2026</span>
               </div>
-              <div className="text-slate-500 italic text-sm mb-2">Dronacharya College of Engineering</div>
+              <div className="text-slate-500 italic text-sm mb-2">Personal Development Portfolio</div>
               <ul className="list-disc list-outside ml-4 text-sm text-slate-600 space-y-1 marker:text-slate-400">
-                <li>Developed a fully functional meeting application supporting peer-to-peer video/audio calls using WebRTC.</li>
-                <li>Used Socket.io for real-time signaling and managing multiple participants in a single room.</li>
-                <li>Integrated features like mute/unmute, camera toggle, chat, and unique room IDs.</li>
-                <li>Built with React.js, modular components, and responsive design principles for a smooth UX.</li>
-                <li>Deployed the production build on Vercel with optimized performance and secure routing.</li>
+                <li>Developed a fully playable 3D game environment utilizing the Unity Engine and C# scripting.</li>
+                <li>Implemented core object-oriented programming (OOP) concepts to manage game states, player mechanics, and user interfaces.</li>
+                <li>Demonstrated highly analytical problem-solving skills and the ability to independently master complex software ecosystems.</li>
               </ul>
             </div>
 
@@ -191,7 +175,7 @@ const ResumePrintView: React.FC<ResumePrintViewProps> = ({ skills, projects }) =
         {/* Reference */}
         <section className="mt-auto">
            <h2 className="text-2xl font-bold uppercase text-[#2c3e50] border-b-2 border-slate-200 pb-2 mb-4">Reference</h2>
-           <p className="text-sm text-slate-500 italic">To be Updated ...</p>
+           <p className="text-sm text-slate-500 italic">Available upon request.</p>
         </section>
 
       </main>
